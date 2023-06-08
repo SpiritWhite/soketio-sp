@@ -13,7 +13,7 @@ export const BandList = () => {
         <td className="px-6 py-4">
           <h3 className="text-xl font-bold text-center"> 0 </h3>
         </td>
-        <td className="px-6 py-4">
+        <td className="text-center px-6 py-4">
           <button className="rounded btn btn-red">
             Borrar
           </button>
