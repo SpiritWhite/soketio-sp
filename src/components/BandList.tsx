@@ -3,7 +3,7 @@ import React from 'react';
 export const BandList = () => {
   const crearRows = () => {
     return (
-      <tr>
+      <tr className="border-b-2 border-b-slate-400">
         <td className="px-6 py-4">
           <button className="rounded btn btn-blue">+1</button>
         </td>
