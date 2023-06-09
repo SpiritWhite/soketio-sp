@@ -23,7 +23,7 @@ export const BandList = () => {
   };
   return (
    <>
-      <h3 className="mb-5 text-xl font-bold">Bandas Actuales</h3>
+      {/* <h3 className="mb-5 text-xl font-bold">Bandas Actuales</h3> */}
       <table className="w-full table text-sm text-lef">
         <thead className="text-xs text-black uppercase border-b-2 border-b-black">
           <tr>
