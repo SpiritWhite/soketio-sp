@@ -27,7 +27,7 @@ export const BandList = ({ bands }: BandsListProps) => {
   };
 
   const focusLost = (band: string, id: string) => {
-
+    
   };
 
   const crearRows = () => {
