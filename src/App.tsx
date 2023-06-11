@@ -13,6 +13,25 @@ const App = () => {
   const [online, setOnline] = useState(false);
   const [band, setBand] = useState([])
 
+  const onVote = (id: string) => {
+    socket.emit('votar-banda', id );
+  };
+
+  const onDelete = (id: string) => {
+    socket.emit('delete-banda', id );
+  };
+
+  const onChangeName = (id: string, newName: string) => {
+    socket.emit('change-banda', { id, newName } );
+  };
+
+  const onSubmitBand = (_event: React.FormEvent<HTMLFormElement>, bandName: string) => {
+    _event.preventDefault();
+    if (bandName.trim().length > 0 ) {
+      socket.emit('new-banda', bandName );
+    }
+  };
+
   useEffect(() => {
     console.log(socket, 'Estado del socket');
     setOnline(socket.connected);
@@ -32,13 +51,12 @@ const App = () => {
 
   useEffect(() => {
     socket.on('current-bands', (bands) => {
-      console.log(bands);
       setBand(bands);
     });
   }, [socket]);
 
   return (
-    <div className="container px-52 py-10">
+    <div className="container md:px-52 sm:px-36 py-10">
       <div className="px-10 py-10">
         <p className="font-bold">
           Service status:
@@ -54,11 +72,11 @@ const App = () => {
       <hr />
 
       <div className="grid grid-rows-1 grid-cols-12 gap-3 py-5">
-        <div className="col-span-8">
-          <BandList bands={band}/>
+        <div className="md:col-span-8 sm:col-span-12">
+          <BandList bands={band} onVote={onVote} onDelete={onDelete} onChangeName={onChangeName} />
         </div>
-        <div className="col-span-4">
-          <BandAdd />
+        <div className="md:col-span-4 sm:col-span-12 md:order-last sm:order-first">
+          <BandAdd onSubmitBand={onSubmitBand} />
         </div>
       </div>
     </div>

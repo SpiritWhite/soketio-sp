@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
 interface BandsListProps {
-  bands: Array<Bands>
+  bands: Array<Bands>,
+  onVote: (id: string) => void,
+  onDelete: (id: string) => void,
+  onChangeName: (id: string, newName: string) => void,
 }
 
 interface Bands {
@@ -10,7 +13,7 @@ interface Bands {
   votes: number
 }
 
-export const BandList = ({ bands }: BandsListProps) => {
+export const BandList = ({ bands, onVote, onDelete, onChangeName }: BandsListProps) => {
   const [bandsList, setBandsList] = useState<Bands[]>(bands);
 
   useEffect(() => {
@@ -24,10 +27,11 @@ export const BandList = ({ bands }: BandsListProps) => {
       }
       return band;
     }));
+    // onChangeName(id, newValue);
   };
 
   const focusLost = (band: string, id: string) => {
-    
+    onChangeName(id, band);
   };
 
   const crearRows = () => {
@@ -35,7 +39,7 @@ export const BandList = ({ bands }: BandsListProps) => {
         bandsList.map(band => (
           <tr key={band.id} className="border-b-2 border-b-slate-400">
             <td className="px-6 py-4">
-              <button className="rounded btn btn-blue">+1</button>
+              <button type="button" className="rounded btn btn-blue" onClick={() => onVote(band.id)}>+1</button>
             </td>
             <td className="px-6 py-4">
               <input
@@ -50,7 +54,7 @@ export const BandList = ({ bands }: BandsListProps) => {
               <h3 className="text-xl font-bold text-center"> {band.votes} </h3>
             </td>
             <td className="text-center px-6 py-4">
-              <button className="rounded btn btn-red">
+              <button type="button" className="rounded btn btn-red" onClick={() => onDelete(band.id)} >
                 Borrar
               </button>
             </td>
