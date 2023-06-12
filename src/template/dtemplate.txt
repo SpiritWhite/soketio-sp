@@ -1,0 +1,23 @@
+ socket.on('votar-banda', (id) => {
+                // console.log(id);
+                this.bandList.increaseVotes(id);
+                this.io.emit('current-bands', this.bandList.getBands() );
+            });
+
+            socket.on('delete-banda', (id) => {
+                // console.log(id);
+                this.bandList.removeBand(id);
+                this.io.emit('current-bands', this.bandList.getBands() );
+            });
+
+            socket.on('change-banda', (data) => {
+                // console.log(id);
+                this.bandList.changeName(data.id, data.newName);
+                this.io.emit('current-bands', this.bandList.getBands() );
+            });
+            
+            socket.on('new-banda', (band) => {
+                // console.log(id);
+                this.bandList.addBand(band);
+                this.io.emit('current-bands', this.bandList.getBands() );
+            });
